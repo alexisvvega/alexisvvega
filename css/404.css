@@ -1,0 +1,146 @@
+:root{
+  /* General Colors */
+  --primary-accent-color: #7458C0;
+  --hero-text-color: #ffffff;
+  --primary-text-color: #000000;
+  --secondary-text-color: #555555;
+  --white-font-color: #ffffff;
+  --dark-accent-color: #1F1665;
+  --not-found-background-color: #0d092d;
+}
+
+/* === 404 Page Styles === */
+.notfound-container {
+  background-color: var(--not-found-background-color);
+  color: var(--primary-accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  padding: 200px 3% 100px;
+  min-height: calc(100vh - 160px);
+  box-sizing: border-box;
+}
+
+.left-section {
+  flex: 1;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.notfound-number {
+  font-size: clamp(80px, 10vw, 120px);
+  font-weight: 700;
+  color: var(--primary-accent-color);
+  margin: 0;
+  line-height: 1;
+}
+
+.notfound-heading {
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 600;
+  margin: 0;
+}
+
+.notfound-message {
+  font-size: clamp(16px, 2vw, 18px);
+  line-height: 1.6;
+  color: var(--primary-accent-color);
+  max-width: 500px;
+}
+
+.notfound-button {
+  background-color: transparent;
+  color: var(--primary-accent-color);
+  border: 2px solid var(--primary-accent-color);
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 25px;
+  width: fit-content;
+  margin-top: 1rem;
+}
+
+.notfound-button:hover {
+  background-color: var(--primary-accent-color);
+  color: var(--primary-text-color);
+}
+
+.right-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+}
+
+.notfound-image {
+  max-width: 60%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .notfound-container {
+    flex-direction: column;
+    text-align: center;
+    padding: 120px 5% 100px;
+    gap: 3rem;
+    min-height: auto;
+  }
+
+  .left-section {
+    align-items: center;
+    max-width: 100%;
+  }
+
+  .notfound-message {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .notfound-button {
+    margin: 0 auto;
+  }
+
+  .right-section {
+    order: 2;
+    max-width: 80%;
+    padding-bottom: 40px;
+  }
+
+  .notfound-image {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 480px) {
+  .notfound-container {
+    padding: 100px 5% 80px;
+    gap: 2.5rem;
+  }
+
+  .notfound-number {
+    font-size: 72px;
+  }
+
+  .notfound-button {
+    padding: 10px 24px;
+    font-size: 15px;
+  }
+
+  .right-section {
+    max-width: 100%;
+    padding-bottom: 30px;
+  }
+
+  .notfound-image {
+    max-width: 100%;
+  }
+}

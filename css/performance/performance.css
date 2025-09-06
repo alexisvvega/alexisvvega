@@ -1,0 +1,680 @@
+:root {
+  /* General Colors */
+  --primary-accent-color: #7458C0;
+  --primary-text-color: #000000;
+  --secondary-text-color: #555555;
+  --white-font-color: #ffffff;
+  --dark-accent-color: #1F1665;
+  --secondary-accent-color: #baafe1;
+
+  /* Filter Navigation Colors */
+  --filter-border-color: #cccccc;
+  --filter-bg-color: #ffffff;
+  --filter-button-hover-color: #baafe157;
+
+  /* Services and Stats Colors */
+  --card-bg-color: #ffffff;
+  --comparison-bg-color: #f8f8f8;
+  --blue-comparison-color: #a8b2bebf;
+  --graph-bg-color: #686868cc;
+}
+
+/* === TECH FILTER === */
+.tech-filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 3rem auto;
+  padding: 0.5rem;
+  border: 1px solid var(--filter-border-color);
+  border-radius: 999px;
+  max-width: 800px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: var(--filter-bg-color);
+}
+
+.tech-button {
+  flex: 1;
+  text-align: center;
+  font-size: 1rem;
+  padding: 0.7rem 1.2rem;
+  border: none;
+  background: transparent;
+  color: var(--primary-text-color);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  border-radius: 999px;
+}
+
+.tech-button.active {
+  background-color: var(--primary-accent-color) !important;
+  color: var(--white-font-color);
+}
+
+.tech-button:hover:not(.active) {
+  background-color: var(--filter-button-hover-color);
+}
+
+.tech-button:hover {
+  background-color: var(--filter-button-hover-color);
+}
+
+/* === TECH FILTER TITLE === */
+.tech-filter-title {
+  text-align: center;
+  margin-top: 12rem;
+}
+
+.tech-filter-title h2 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: var(--primary-text-color);
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.tech-filter-title h2::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: var(--dark-accent-color);
+  border-radius: 5px;
+}
+
+.tech-content {
+  display: none;
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 2rem;
+  transition: opacity 0.3s ease;
+}
+
+.tech-content.active {
+  display: block;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .tech-filter {
+    flex-wrap: wrap;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    margin: 0 0.5rem 2rem;
+  }
+
+  .tech-button {
+    flex: 1 1 45%;
+    margin: 0.3rem;
+  }
+}
+
+/* === IMPACT RESISTANCE SECTION === */
+.impact-intro-text p,
+.impact-intro-text ul {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--primary-text-color);
+  margin-bottom: 1rem;
+}
+
+.impact-intro-text ul {
+  list-style: disc;
+  margin-left: 1.5rem;
+  padding-left: 0.5rem;
+}
+
+.impact-intro-text li {
+  margin-bottom: 0.5rem;
+}
+
+.impact-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background: var(--card-bg-color);
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  flex: 1 1 300px;
+}
+
+.card img,
+.card .impact-graph {
+  width: 70%;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 1.5rem;
+  display: block;
+  padding: 0 1.5rem;
+}
+
+.performance-insights h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  padding: 1.5rem 1.5rem 0;
+  text-align: center;
+  color: var(--primary-text-color);
+}
+
+.performance-advantages.card {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+}
+
+.performance-advantages .comparison-title {
+  background-color: var(--secondary-accent-color);
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding: 1.25rem;
+  text-align: center;
+  color: var(--primary-text-color);
+  border-radius: 1rem 1rem 0 0;
+  margin: 0;
+}
+
+.advantages-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.advantage-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--primary-text-color);
+  position: relative;
+}
+
+.advantage-item::before {
+  content: "✓";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: 0.8rem;
+  background-color: var(--secondary-accent-color);
+  border-radius: 50%;
+  color: var(--primary-text-color);
+  flex-shrink: 0;
+}
+
+.advantage-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 1.5rem;
+  right: 1.5rem;
+  bottom: 0;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.performance-comparison {
+  background: var(--comparison-bg-color);
+  border-radius: 1rem;
+  padding: 2rem 1.5rem;
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.performance-comparison h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--primary-text-color);
+}
+
+.comparison-grid {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.performance-card {
+  flex: 1 1 clamp(280px, 45%, 360px);
+  max-width: 360px;
+  min-width: 260px;
+  background: var(--card-bg-color);
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.performance-card img {
+  width: 60%;
+  max-width: 200px;
+  height: auto;
+  margin: 1.25rem auto 1rem;
+  border-radius: 0.5rem;
+}
+
+.performance-card p {
+  padding: 0 1.5rem 1.5rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0;
+  color: var(--primary-text-color);
+}
+
+.performance-card em {
+  font-style: italic;
+  color: var(--secondary-text-color);
+}
+
+.comparison-title {
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding: 1.5rem;
+  text-align: center;
+  width: 100%;
+  border-radius: 1rem 1rem 0 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.vs {
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin: 0 1rem;
+  color: var(--secondary-text-color);
+  align-self: center;
+}
+
+.light-green {
+  background-color: var(--secondary-accent-color);
+  color: var(--primary-text-color);
+}
+
+.light-blue {
+  background-color: var(--blue-comparison-color);
+  color: var(--primary-text-color);
+}
+
+@media (max-width: 872px) {
+  .performance-card img {
+    width: 50%;
+    max-width: 160px;
+    margin: 1rem auto 0.5rem;
+  }
+  .comparison-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .performance-card {
+    min-height: auto;
+  }
+  .vs {
+    margin: 0.5rem 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .impact-grid {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .card {
+    flex: 1 1 auto;
+  }
+  .advantage-item {
+    padding: 0.8rem 1.25rem;
+  }
+}
+
+/* === PUNCTURE PROTECTION SECTION === */
+.puncture-image-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.puncture-image-row img {
+  width: 30%;
+  min-width: 200px;
+  max-width: 280px;
+  height: auto;
+  border-radius: 0.75rem;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.puncture-performance-insights {
+  padding: 1.5rem 1.5rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.puncture-performance-insights h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--primary-text-color);
+}
+
+.puncture-graph-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.puncture-performance-graph {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+.puncture-graph-container img.puncture-performance-graph:first-of-type {
+  width: 70%;
+  max-width: 500px;
+}
+
+.puncture-graph-wrapper {
+  background-color: var(--graph-bg-color);
+  border-radius: 0.75rem;
+  margin-bottom: 2rem;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  max-width: 700px;
+}
+
+@media (max-width: 768px) {
+  .puncture-graph-container {
+    gap: 1.5rem;
+  }
+
+  .puncture-graph-wrapper {
+    margin-bottom: 2.5rem;
+    padding: 1rem 0.75rem;
+  }
+
+  .puncture-performance-graph {
+    width: 100%;
+    padding: 0 1rem;
+  }
+}
+
+/* === CRASH PROTECTION SECTION === */
+#crash .impact-intro-text {
+  margin-bottom: 3rem;
+}
+
+#crash .top-text {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#crash .left-text {
+  flex: 1 1 380px;
+}
+
+#crash .right-image {
+  flex: 1 1 280px;
+  text-align: center;
+}
+
+.crash-comparison-image {
+  width: 80%;
+  height: auto;
+}
+
+.crash-grid-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0 3rem;
+}
+
+.crash-grid-image {
+  flex: 1 1 300px;
+  max-width: 480px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.crash-performance-insights {
+  padding: 2rem 1.5rem 2.5rem;
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.crash-performance-insights h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--primary-text-color);
+}
+
+.crash-graph-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.crash-graph-container img.crash-performance-graph:first-of-type {
+  width: 50%;
+  max-width: 500px;
+}
+
+.crash-graph-row {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem;
+  overflow-x: auto;
+  box-sizing: border-box;
+}
+
+.crash-graph-row .crash-performance-graph {
+  flex: 1 1 100%;
+  max-width: 420px;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  height: auto;
+  object-fit: contain;
+}
+
+.crash-graph-wrapper {
+  background-color: var(--graph-bg-color);
+  border-radius: 0.75rem;
+  max-width: 680px;
+  width: 90%;
+  padding: 1rem 0.5rem;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.crash-performance-graph {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+@media (max-width: 900px) {
+  #crash .top-text {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .crash-performance-insights {
+    padding: 1.5rem 1rem 2rem;
+  }
+
+  .crash-performance-insights h3 {
+    font-size: 1.4rem;
+  }
+
+  .crash-graph-row {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .crash-graph-row .crash-performance-graph {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 600px) {
+  .crash-grid-row {
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1.5rem 0 2rem;
+    padding: 0 1rem;
+  }
+
+  .crash-grid-image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  .crash-graph-wrapper {
+    padding: 0.75rem 0.25rem;
+    width: 95%;
+  }
+
+  .crash-performance-insights {
+    padding: 1.25rem 0.75rem;
+  }
+
+  .crash-graph-container {
+    gap: 1.25rem;
+  }
+}
+
+/* === FLEXIBILITY & DURABILITY SECTION === */
+.flex-durability-intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.flex-durability-intro .left-text {
+  flex: 2 1 480px;
+}
+
+.flex-durability-intro .performance-advantages {
+  flex: 1 1 260px;
+  max-width: 320px;
+}
+
+.durability-performance-insights {
+  padding: 2rem 1.5rem 2.5rem;
+  margin-top: 3rem;
+  text-align: center;
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.durability-performance-insights h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--primary-text-color);
+}
+
+.durability-graph-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.durability-performance-graph {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  flex: 1 1 300px;
+  max-width: 420px;
+}
+
+.durability-graph-wrapper {
+  background-color: var(--graph-bg-color);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .flex-durability-intro {
+    flex-direction: column;
+  }
+
+  .flex-durability-intro .performance-advantages {
+    max-width: 100%;
+  }
+  .durability-graph-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .performance-advantages.card {
+    margin: 0 auto;
+  }
+  .durability-graph-wrapper {
+    padding: 0.75rem;
+    width: 95%;
+  }
+}
