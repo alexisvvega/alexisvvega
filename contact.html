@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="components/styles/navbar.css" />
     <link rel="stylesheet" href="components/styles/footer.css" />
     <link rel="stylesheet" href="css/contact/contact.css" />
-    <script src="js/contact/careers.js"></script>
   </head>
   <body>
     <!-- Navbar -->
@@ -18,15 +17,113 @@
 
     <!-- Main Content -->
     <main>
-      <!-- Hero Section -->
-      <header class="hero">
-        <div class="hero__content">
-          <h1>Keep In Touch</h1>
+      <section class="contact-intro">
+        <h1>°❀⋆.ೃ࿔*:･Let’s Connect!°❀⋆.ೃ࿔*:･ </h1>
+        <p>
+          Whether you have a question, a collaboration idea, or just want to say hi — 
+          I’d love to hear from you.
+        </p>
+      </section>
+      <section class="contact-container">
+        <!-- Left: Contact Form -->
+        <div class="contact-form">
+          <h2>Get in Touch</h2>
+          
           <p>
-            Learn more about me
+            If you prefer to contact me directly, send your Email to:
+            <a href="mailto:alexisvvegab@gmail.com">alexisvvegab@gmail.com</a>
           </p>
+          <form
+            id="contact-form"
+            action="https://formsubmit.co/alexisvvegab@gmail.com"
+            method="POST"
+          >
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_template" value="table" />
+            <input
+              type="hidden"
+              name="_autoresponse"
+              value="Thank you for reaching out! I’ll get back to you soon."
+            />
+
+            <!-- Subject -->
+            <div class="form-group">
+              <label for="subject">Inquiry</label>
+              <select id="subject" name="subject" required>
+                <option value="" disabled selected>Select a subject</option>
+                <option value="General Inquiry">General Inquiry</option>
+                <option value="Feedback">Feedback</option>
+                <option value="Collaboration">Collaboration</option>
+                <option value="Work Opportunity">Work Opportunity</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <!-- Name -->
+            <div class="form-group">
+              <label for="name">Name *</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Your name"
+                required
+              />
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Your email"
+                required
+              />
+            </div>
+
+            <!-- Message -->
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Write your message..."
+                rows="5"
+                required
+              ></textarea>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="button">Submit</button>
+          </form>
+           <div id="thank-you-message" class="thank-you">
+            Thank you! Your message was sent.
+          </div>
         </div>
-      </header>
+
+        <!-- Divider -->
+        <div class="divider"></div>
+
+        <!-- Right: Resume -->
+        <div class="contact-info">
+          <h2>Resume</h2>
+          <p>
+            Download my resume to learn more about my skills and experience.
+          </p>
+          <section class="resume-preview">
+            <iframe
+              src="assets/documents/AlexisVegaResume.pdf"
+              title="Alexis Vega's Resume"
+              class="resume-iframe"
+            ></iframe>
+          </section>
+          <a href="assets/documents/AlexisVegaResume.pdf" target="_blank" class="button" download>
+            Download Resume
+          </a>
+        </div>
+      </section>
     </main>
 
     <!-- Footer -->
