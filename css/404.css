@@ -1,146 +1,191 @@
-:root{
-  /* General Colors */
-  --primary-accent-color: #8394f7;
-  --hero-text-color: #ffffff;
-  --primary-text-color: #000000;
-  --secondary-text-color: #555555;
-  --white-font-color: #ffffff;
-  --dark-accent-color: #1F1665;
-  --not-found-background-color: #0d092d;
+:root {
+  --primary-accent-color: #a6b5ff;
+  --secondary-accent-color: #ffcce7;
+  --background-color: #fafbff;
+  --text-color: #1b1b2e;
+  --muted-text-color: #666a78;
 }
 
-/* === 404 Page Styles === */
+/* Full page layout */
 .notfound-container {
-  background-color: var(--not-found-background-color);
-  color: var(--primary-accent-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 3rem;
-  padding: 200px 3% 100px;
-  min-height: calc(100vh - 160px);
-  box-sizing: border-box;
+  padding: 15rem 2.5rem 15rem;
+  text-align: center;
+  position: relative;
 }
 
-.left-section {
-  flex: 1;
-  max-width: 600px;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.notfound-number {
-  font-size: clamp(80px, 10vw, 120px);
-  font-weight: 700;
-  color: var(--primary-accent-color);
+.notfound-container h1 {
+  font-size: 6rem;
   margin: 0;
-  line-height: 1;
+  color: var(--primary-accent-color);
+  text-shadow: 0 4px 10px rgba(166, 181, 255, 0.4);
 }
 
-.notfound-heading {
-  font-size: clamp(24px, 3vw, 32px);
+.notfound-container .subtitle {
+  font-size: 1.5rem;
+  margin: 0.5rem 0 1rem;
+  color: var(--secondary-accent-color);
+}
+
+.notfound-container .description {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: var(--muted-text-color);
+  font-style: italic;
+}
+
+/* Button */
+.btn-home {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  background: var(--primary-accent-color);
+  color: white;
+  text-decoration: none;
   font-weight: 600;
-  margin: 0;
-}
-
-.notfound-message {
-  font-size: clamp(16px, 2vw, 18px);
-  line-height: 1.6;
-  color: var(--primary-accent-color);
-  max-width: 500px;
-}
-
-.notfound-button {
-  background-color: transparent;
-  color: var(--primary-accent-color);
-  border: 2px solid var(--primary-accent-color);
-  padding: 12px 30px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
   border-radius: 25px;
-  width: fit-content;
-  margin-top: 1rem;
+  box-shadow: 0 6px 12px rgba(131, 148, 247, 0.2);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.notfound-button:hover {
-  background-color: var(--primary-accent-color);
-  color: var(--primary-text-color);
+.btn-home:hover {
+  transform: translateY(-3px) scale(1.05);
+  background: var(--secondary-accent-color);
+  box-shadow: 0 12px 25px rgba(255, 204, 231, 0.4);
 }
 
-.right-section {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 500px;
+/* Cute floating decorations */
+.decorations {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  pointer-events: none;
+  z-index: 0;
 }
 
-.notfound-image {
-  max-width: 60%;
-  height: auto;
-  object-fit: contain;
-  border-radius: 12px;
+.decorations .star {
+  position: absolute;
+  font-size: 1.2rem;
+  opacity: 0.7;
+  color: #cbb2ff;
+  animation: float 10s infinite ease-in-out;
+  z-index: -1;
 }
 
-/* Responsive adjustments */
-@media (max-width: 900px) {
+/* sprinkle them everywhere with nth-child */
+.decorations .star:nth-child(1) {
+  top: 8%;
+  left: 12%;
+  animation-delay: 0s;
+}
+.decorations .star:nth-child(2) {
+  top: 25%;
+  left: 75%;
+  animation-delay: 1.2s;
+}
+.decorations .star:nth-child(3) {
+  top: 55%;
+  left: 45%;
+  animation-delay: 2.4s;
+}
+.decorations .star:nth-child(4) {
+  top: 72%;
+  left: 68%;
+  animation-delay: 3.6s;
+}
+.decorations .star:nth-child(5) {
+  top: 40%;
+  left: 20%;
+  animation-delay: 4.8s;
+}
+.decorations .star:nth-child(6) {
+  top: 65%;
+  left: 85%;
+  animation-delay: 6s;
+}
+.decorations .star:nth-child(7) {
+  top: 15%;
+  left: 55%;
+  animation-delay: 7.2s;
+}
+.decorations .star:nth-child(8) {
+  top: 80%;
+  left: 10%;
+  animation-delay: 1s;
+}
+.decorations .star:nth-child(9) {
+  top: 5%;
+  left: 80%;
+  animation-delay: 2s;
+}
+.decorations .star:nth-child(10) {
+  top: 90%;
+  left: 60%;
+  animation-delay: 3s;
+}
+.decorations .star:nth-child(11) {
+  top: 30%;
+  left: 5%;
+  animation-delay: 4s;
+}
+.decorations .star:nth-child(12) {
+  top: 50%;
+  left: 90%;
+  animation-delay: 5s;
+}
+.decorations .star:nth-child(13) {
+  top: 90%;
+  left: 90%;
+  animation-delay: 1s;
+}
+.decorations .star:nth-child(14) {
+  top: 90%;
+  left: 30%;
+  animation-delay: 2s;
+}
+.decorations .star:nth-child(15) {
+  top: 10%;
+  left: 30%;
+  animation-delay: 3s;
+}
+.decorations .star:nth-child(16) {
+  top: 30%;
+  left: 40%;
+  animation-delay: 4s;
+}
+.decorations .star:nth-child(17) {
+  top: 50%;
+  left: 70%;
+  animation-delay: 5s;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-20px) rotate(15deg);
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
   .notfound-container {
-    flex-direction: column;
-    text-align: center;
-    padding: 120px 5% 100px;
-    gap: 3rem;
-    min-height: auto;
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
   }
 
-  .left-section {
-    align-items: center;
-    max-width: 100%;
+  .notfound-container h1 {
+    font-size: 4.5rem;
   }
 
-  .notfound-message {
-    text-align: center;
-    max-width: 100%;
-  }
-
-  .notfound-button {
-    margin: 0 auto;
-  }
-
-  .right-section {
-    order: 2;
-    max-width: 80%;
-    padding-bottom: 40px;
-  }
-
-  .notfound-image {
-    max-width: 80%;
-  }
-}
-
-@media (max-width: 480px) {
-  .notfound-container {
-    padding: 100px 5% 80px;
-    gap: 2.5rem;
-  }
-
-  .notfound-number {
-    font-size: 72px;
-  }
-
-  .notfound-button {
-    padding: 10px 24px;
-    font-size: 15px;
-  }
-
-  .right-section {
-    max-width: 100%;
-    padding-bottom: 30px;
-  }
-
-  .notfound-image {
-    max-width: 100%;
+  .btn-home {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.95rem;
   }
 }
