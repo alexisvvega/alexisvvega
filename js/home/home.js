@@ -1,5 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const texts = ["Software Engineer", "Web Developer", "UI/UX Designer", "Problem Solver"];
+  const texts = [
+    "Software Engineer",
+    "Web Developer",
+    "UI/UX Designer",
+    "Problem Solver",
+  ];
   const typingTextElement = document.getElementById("typing-text");
   const cursorElement = document.getElementById("cursor");
   let textIndex = 0;

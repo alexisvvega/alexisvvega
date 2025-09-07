@@ -1,6 +1,6 @@
 :root {
   --primary-color: #0d2950;
-  --secondary-color: #8394F7;
+  --secondary-color: #8394f7;
   --text-color: #ffffff;
   --background-color: #f4f4f4;
   --input-border: #cccccc;
@@ -55,7 +55,7 @@
 #cursor {
   display: inline-block;
   width: 3px;
-  height: .7em;
+  height: 0.7em;
   background-color: var(--secondary-color);
   margin-left: 4px;
   vertical-align: middle;
@@ -134,4 +134,3 @@
     gap: 0;
   }
 }
-

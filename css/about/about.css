@@ -83,7 +83,11 @@
   text-align: center;
   margin: 0;
   color: var(--primary-accent-color);
-  background: linear-gradient(135deg, var(--primary-accent-color), var(--secondary-accent-color));
+  background: linear-gradient(
+    135deg,
+    var(--primary-accent-color),
+    var(--secondary-accent-color)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -289,7 +293,9 @@
   padding: 0.8rem;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
   transform: rotate(-3deg);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -360,7 +366,9 @@
   border-radius: 16px;
   padding: 2rem;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .category-card:hover {
