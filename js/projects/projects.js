@@ -11,6 +11,24 @@ class ProjectsGrid extends HTMLElement {
 
     this.projectsData = [
       {
+        category: "School", 
+        title: "Case Study (In Progress)",
+        date: "Spring 2026",
+        image: "assets/images/projects/ucsd.png", 
+        modalImage: "",
+        description: "Coming soon: detailed case study of my design and development process.",
+        longDescription:
+          "This case study is currently in progress. It will document my full design and development process, including research, ideation, prototyping, implementation, and evaluation. Check back soon for updates!",
+        tech: "TBD",
+        role: "Designer",
+        contributions: [
+          "Placeholder. Content coming soon",
+        ],
+        links: {
+          
+        },
+      },
+      {
         category: "School",
         title: "MemorySpot",
         image: "assets/images/projects/memoryspot.png",
