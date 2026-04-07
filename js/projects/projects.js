@@ -13,6 +13,7 @@ class ProjectsGrid extends HTMLElement {
       {
         category: "School", 
         title: "Case Study (In Progress)",
+        id: "case-study",
         date: "Spring 2026",
         image: "assets/images/projects/ucsd.png", 
         modalImage: "",
@@ -312,19 +313,17 @@ class ProjectsGrid extends HTMLElement {
   }
 
   renderCard(item, index) {
-    const id = item.title === "Case Study (In Progress)" ? "case-study" : "";
-  
-    return `
-      <div class="project-card" id="${id}">
-        <img src="${item.image}" alt="${item.title}">
-        <div class="project-content">
-          <h3>${item.title}</h3>
-          <p>${item.description}</p>
-          <span class="learn-more" data-index="${index}">Learn More →</span>
-        </div>
+  return `
+    <div class="project-card" data-id="${item.id || ""}">
+      <img src="${item.image}" alt="${item.title}">
+      <div class="project-content">
+        <h3>${item.title}</h3>
+        <p>${item.description}</p>
+        <span class="learn-more" data-index="${index}">Learn More →</span>
       </div>
-    `;
-  }
+    </div>
+  `;
+}
 
   openModal(item) {
     const modal = document.createElement("div");
