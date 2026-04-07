@@ -11,23 +11,20 @@ class ProjectsGrid extends HTMLElement {
 
     this.projectsData = [
       {
-        category: "School", 
+        category: "School",
         title: "Case Study (In Progress)",
         id: "case-study",
         date: "Spring 2026",
-        image: "assets/images/projects/ucsd.png", 
+        image: "assets/images/projects/ucsd.png",
         modalImage: "",
-        description: "Coming soon: detailed case study of my design and development process.",
+        description:
+          "Coming soon: detailed case study of my design and development process.",
         longDescription:
           "This case study is currently in progress. It will document my full design and development process, including research, ideation, prototyping, implementation, and evaluation. Check back soon for updates!",
         tech: "TBD",
         role: "Designer",
-        contributions: [
-          "Placeholder. Content coming soon",
-        ],
-        links: {
-          
-        },
+        contributions: ["Placeholder. Content coming soon"],
+        links: {},
       },
       {
         category: "School",
@@ -199,6 +196,15 @@ class ProjectsGrid extends HTMLElement {
   connectedCallback() {
     this.render();
     this.addFilterListeners();
+    const hash = window.location.hash.replace("#", "");
+
+    if (hash) {
+      const project = this.projectsData.find((p) => p.id === hash);
+      if (project) {
+        // delay ensures DOM is ready
+        setTimeout(() => this.openModal(project), 100);
+      }
+    }
   }
 
   render() {
@@ -313,7 +319,7 @@ class ProjectsGrid extends HTMLElement {
   }
 
   renderCard(item, index) {
-  return `
+    return `
     <div class="project-card" data-id="${item.id || ""}">
       <img src="${item.image}" alt="${item.title}">
       <div class="project-content">
@@ -323,7 +329,7 @@ class ProjectsGrid extends HTMLElement {
       </div>
     </div>
   `;
-}
+  }
 
   openModal(item) {
     const modal = document.createElement("div");
