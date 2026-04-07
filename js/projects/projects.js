@@ -195,10 +195,13 @@ class ProjectsGrid extends HTMLElement {
     ];
   }
 
-  connectedCallback() {
-    this.render();
-    this.addFilterListeners();
-    const hash = window.location.hash.slice(1); // removes the #
+connectedCallback() {
+  this.render();
+  this.addFilterListeners();
+
+  // Small delay lets the page fully render before opening the modal
+  setTimeout(() => {
+    const hash = window.location.hash.slice(1);
     if (hash) {
       const match = this.projectsData.find((p) => {
         const slug = p.title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
@@ -206,7 +209,8 @@ class ProjectsGrid extends HTMLElement {
       });
       if (match) this.openModal(match);
     }
-  }
+  }, 100);
+}
 
   render() {
     const style = `
