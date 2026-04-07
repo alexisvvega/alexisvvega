@@ -312,6 +312,8 @@ class ProjectsGrid extends HTMLElement {
   }
 
   renderCard(item, index) {
+    const id = item.title === "Case Study (In Progress)" ? "case-study" : "";
+  
     return `
       <div class="project-card">
         <img src="${item.image}" alt="${item.title}">
