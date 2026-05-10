@@ -11,21 +11,33 @@ class ProjectsGrid extends HTMLElement {
 
     this.projectsData = [
       {
-        category: "School", 
-        title: "Case Study (In Progress)",
-        date: "Spring 2026",
-        image: "assets/images/projects/ucsd.png", 
-        modalImage: "",
-        description: "Coming soon: detailed case study of my design and development process.",
-        longDescription:
-          "This case study is currently in progress. It will document my full design and development process, including research, ideation, prototyping, implementation, and evaluation. Check back soon for updates!",
-        tech: "TBD",
-        role: "Designer",
+      category: "School",
+      title: "Apple FindMy Extension: Safety Alerts",
+      date: "April - June 2026",
+      image: "assets/images/projects/ucsd.png",
+      modalImage: "assets/images/projects/FindMy.png",
+      description: "Adding safety alerts to Apple FindMy for worried parents of teens.",
+      longDescription: `
+        <p><strong>The Problem:</strong> Millions of parents use Apple FindMy to track their teens and young adults. But FindMy only shows their location without context about whether that location has a reported crime, hazards, or emergencies. Parents are left anxious, manually checking outside news sources, or simply worrying until their child texts back.</p>
+
+        <p><strong>Our Solution:</strong> We extended FindMy with two features: (1) a color-coded safety layer on the map (green/yellow/red based on recent incident density), and (2) customizable push notifications for when an incident occurs within a preset radius of their child's location.</p>
+
+        <p><strong>User Research:</strong> We interviewed four parents who actively use FindMy. Key findings: "The location itself doesn't let me know how safe the area is." Parents check locations compulsively (every 30 minutes) and feel anxious even after checking because they lack safety context.</p>
+
+        <p><strong>The Market Opportunity:</strong> The personal safety app market is projected to reach $48 billion by 2033. 70% of parents worry about their children's safety. Yet FindMy which is on over 1 billion devices, offers zero safety context.</p>
+        `,
+        tech: "Figma, User Research, UX Design, iOS Design Guidelines",
+        role: "UX Designer & Researcher",
         contributions: [
-          "Placeholder. Content coming soon",
+          "Conducted semi-structured interviews with 2 parents of teens/young adults",
+          "Synthesized user research findings into pain points, wishes, and unexpected behaviors",
+          "Created 3 user flows (Safety Layer Toggle + Alert Setup & Response + Alert Notification) with multiple variations for each",
+          "Designed 20+ hand-drawn UI sketches exploring layout variations",
+          "Built high-fidelity Figma prototypes extending Apple's native design language",
+          "Authored business impact case study connecting problem to market opportunity",
         ],
         links: {
-          
+          figma: "https://www.figma.com/design/tftAO5jNAHKdwCldswTck4/Cogs-127?node-id=0-1&t=ddyYZvLFJargeYI5-1",
         },
       },
       {
@@ -195,23 +207,22 @@ class ProjectsGrid extends HTMLElement {
     ];
   }
 
-connectedCallback() {
-  this.render();
-  this.addFilterListeners();
-
-  // Small delay lets the page fully render before opening the modal
-  setTimeout(() => {
-    const hash = window.location.hash.slice(1);
-    if (hash) {
-      const match = this.projectsData.find((p) => {
-        const slug = p.title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
-        return slug === hash;
-      });
-      if (match) this.openModal(match);
-    }
-  }, 100);
-}
-
+   connectedCallback() {
+    this.render();
+    this.addFilterListeners();
+ 
+    setTimeout(() => {
+      const hash = window.location.hash.slice(1);
+      if (hash) {
+        const match = this.projectsData.find((p) => {
+          const slug = p.title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+          return slug === hash;
+        });
+        if (match) this.openModal(match);
+      }
+    }, 100);
+  }
+ 
   render() {
     const style = `
       <style>
@@ -233,8 +244,7 @@ connectedCallback() {
           grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
           gap: 2rem;
         }
-
-        /* Cards: fixed height + consistent layout */
+ 
         .project-card {
           background: #fff;
           border-radius: 10px;
@@ -289,10 +299,9 @@ connectedCallback() {
         }
       </style>
     `;
-
-    // Group projects by category
+ 
     const categories = [...new Set(this.projectsData.map((p) => p.category))];
-
+ 
     const sectionsHTML = categories
       .map((category) => {
         const items = this.projectsData.filter((p) => p.category === category);
@@ -306,23 +315,21 @@ connectedCallback() {
         `;
       })
       .join("");
-
+ 
     this.shadowRoot.innerHTML = `
       ${style}
       <div class="projects-container">
         ${sectionsHTML}
       </div>
     `;
-
+ 
     this.shadowRoot.querySelectorAll(".learn-more").forEach((btn) => {
-      const title = btn
-        .closest(".project-card")
-        .querySelector("h3").textContent;
+      const title = btn.closest(".project-card").querySelector("h3").textContent;
       const project = this.projectsData.find((p) => p.title === title);
       btn.addEventListener("click", () => this.openModal(project));
     });
   }
-
+ 
   renderCard(item, index) {
     return `
       <div class="project-card">
@@ -335,19 +342,34 @@ connectedCallback() {
       </div>
     `;
   }
-
+ 
   openModal(item) {
     const slug = item.title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
     history.pushState(null, "", `#${slug}`);
+ 
     const modal = document.createElement("div");
     modal.classList.add("project-modal");
-
+ 
+    const isDesktop = window.matchMedia("(min-width: 769px)").matches;
+ 
     const buttonsHTML = `
       ${item.links?.github ? `<a href="${item.links.github}" target="_blank" class="modal-link github">GitHub</a>` : ""}
-      ${item.links?.figma ? `<a href="${item.links.figma}"  target="_blank" class="modal-link figma">Figma</a>` : ""}
-      ${item.links?.demo ? `<a href="${item.links.demo}"   target="_blank" class="modal-link demo">Live Demo</a>` : ""}
+      ${item.links?.figma  ? `<a href="${item.links.figma}"  target="_blank" class="modal-link figma">Figma</a>`  : ""}
+      ${item.links?.demo   ? `<a href="${item.links.demo}"   target="_blank" class="modal-link demo">Live Demo</a>`  : ""}
     `;
-
+ 
+    // Expand icon SVG (two-arrows-out)
+    const expandIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/>
+      <line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>
+    </svg>`;
+ 
+    // Collapse icon SVG (two-arrows-in)
+    const collapseIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/>
+      <line x1="10" y1="14" x2="3" y2="21"/><line x1="21" y1="3" x2="14" y2="10"/>
+    </svg>`;
+ 
     modal.innerHTML = `
       <style>
         .project-modal {
@@ -361,21 +383,42 @@ connectedCallback() {
         }
         .modal-content {
           background: #fff;
-          width: min(1000px, 92vw);
-          max-height: min(85dvh, 85vh); /* dvh fixes mobile viewport toolbars */
+          width: min(580px, 92vw);
+          max-height: min(85dvh, 85vh);
           border-radius: 12px;
           box-sizing: border-box;
           display: flex;
           flex-direction: column;
-          overflow: hidden; /* keep rounded corners when inner scrolls */
+          overflow: hidden;
           position: relative;
+          transition: width 0.4s cubic-bezier(0.4,0,0.2,1),
+                      max-height 0.4s cubic-bezier(0.4,0,0.2,1),
+                      border-radius 0.35s ease;
         }
+ 
+        /* === EXPANDED STATE (desktop only) === */
+        @media (min-width: 769px) {
+          .modal-content.expanded {
+            width: min(1300px, 94vw);
+            max-height: 90dvh;
+          }
+        }
+ 
+        /* Expanded: just wider and taller, content stays stacked */
+        @media (min-width: 769px) {
+          .modal-content.expanded .modal-body img {
+            max-width: 70%;
+            max-height: 500px;
+          }
+        }
+ 
         .modal-header {
           display: flex;
           align-items: center;
           justify-content: space-between;
           padding: 1rem 1.25rem;
           border-bottom: 1px solid #eee;
+          flex-shrink: 0;
         }
         .modal-title {
           margin: 0;
@@ -388,6 +431,31 @@ connectedCallback() {
           margin: 0.25rem 0 0;
           font-weight: 400;
         }
+        .modal-header-actions {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+        .modal-expand-btn {
+          display: none; /* hidden on mobile */
+          background: none;
+          border: 1px solid #ddd;
+          border-radius: 6px;
+          padding: 5px 7px;
+          cursor: pointer;
+          color: #555;
+          line-height: 1;
+          transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+        .modal-expand-btn:hover {
+          background: #f3f0ff;
+          border-color: var(--primary-accent-color, #8394f7);
+          color: var(--primary-accent-color, #8394f7);
+        }
+        /* Show expand button only on desktop */
+        @media (min-width: 769px) {
+          .modal-expand-btn { display: inline-flex; align-items: center; justify-content: center; }
+        }
         .modal-close {
           background: none;
           border: none;
@@ -395,18 +463,20 @@ connectedCallback() {
           line-height: 1;
           cursor: pointer;
           padding: 0 0 0 0.25rem;
+          color: #555;
         }
         .modal-body {
           padding: 1rem 1.25rem;
           overflow-y: auto;
           -webkit-overflow-scrolling: touch;
+          flex: 1;
         }
         .modal-body img {
           max-width: 90%;
           height: auto;
           border-radius: 8px;
           display: block;
-          margin: 1rem auto; /* centers image horizontally */
+          margin: 1rem auto;
         }
         .modal-footer {
           padding: 1rem 1.25rem;
@@ -415,6 +485,7 @@ connectedCallback() {
           gap: 0.75rem;
           flex-wrap: wrap;
           justify-content: center;
+          flex-shrink: 0;
         }
         .modal-link {
           display: inline-block;
@@ -433,56 +504,73 @@ connectedCallback() {
         .modal-link.github { background: #A7C1A8; }
         .modal-link.figma  { background: #eb8768; }
         .modal-link.demo   { background: #89A8B2; }
-
-        /* Scrollbar aesthetics (optional) */
+ 
         .modal-body::-webkit-scrollbar { width: 8px; }
         .modal-body::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.25); border-radius: 4px; }
         .modal-body::-webkit-scrollbar-track { background: transparent; }
-
+ 
         @media (max-width: 480px) {
           .modal-content { border-radius: 10px; }
           .modal-title { font-size: 1.1rem; }
         }
       </style>
-
+ 
       <div class="modal-content" role="dialog" aria-modal="true" aria-label="${item.title}">
         <div class="modal-header">
           <div>
             <h2 class="modal-title">${item.title}</h2>
             ${item.date ? `<p class="modal-date">${item.date}</p>` : ""}
           </div>
-          <button class="modal-close" aria-label="Close modal">&times;</button>
+          <div class="modal-header-actions">
+            <button class="modal-expand-btn" aria-label="Expand modal" title="Expand view">
+              ${expandIcon}
+            </button>
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+          </div>
         </div>
-
+ 
         <div class="modal-body">
           ${item.modalImage ? `<img src="${item.modalImage}" alt="${item.title}">` : ""}
-          <p><strong>Role:</strong> ${item.role}</p>
-          <p><strong>Tech:</strong> ${item.tech}</p>
-          <p>${item.longDescription || item.description}</p>
-          ${
-            item.contributions?.length
-              ? `
-            <h4>Key Contributions:</h4>
-            <ul>
-              ${item.contributions.map((c) => `<li>${c}</li>`).join("")}
-            </ul>
-          `
-              : ""
-          }
+          <div class="modal-body-text">
+            <p><strong>Role:</strong> ${item.role}</p>
+            <p><strong>Tech:</strong> ${item.tech}</p>
+            <p>${item.longDescription || item.description}</p>
+            ${
+              item.contributions?.length
+                ? `
+              <h4>Key Contributions:</h4>
+              <ul>
+                ${item.contributions.map((c) => `<li>${c}</li>`).join("")}
+              </ul>
+            `
+                : ""
+            }
+          </div>
         </div>
-
+ 
         <div class="modal-footer">
           ${buttonsHTML.trim() || "<span style='color:#777;'>No external links available</span>"}
         </div>
       </div>
     `;
-
+ 
     document.body.appendChild(modal);
-
-    // open animation (fade in)
     requestAnimationFrame(() => modal.classList.add("active"));
-
-    // close handlers
+ 
+    // --- Expand / collapse toggle ---
+    const modalContent = modal.querySelector(".modal-content");
+    const expandBtn = modal.querySelector(".modal-expand-btn");
+    let expanded = false;
+ 
+    expandBtn.addEventListener("click", () => {
+      expanded = !expanded;
+      modalContent.classList.toggle("expanded", expanded);
+      expandBtn.setAttribute("aria-label", expanded ? "Collapse modal" : "Expand modal");
+      expandBtn.setAttribute("title", expanded ? "Collapse view" : "Expand view");
+      expandBtn.innerHTML = expanded ? collapseIcon : expandIcon;
+    });
+ 
+    // --- Close handlers ---
     const closeModal = () => {
       history.pushState(null, "", window.location.pathname);
       modal.classList.remove("active");
@@ -492,14 +580,14 @@ connectedCallback() {
     const onEsc = (e) => {
       if (e.key === "Escape") closeModal();
     };
-
+ 
     modal.querySelector(".modal-close").onclick = closeModal;
     modal.addEventListener("click", (e) => {
       if (e.target === modal) closeModal();
     });
     window.addEventListener("keydown", onEsc, { once: true });
   }
-
+ 
   addFilterListeners() {
     const filterButtons = document.querySelectorAll(".filter-button");
     filterButtons.forEach((button) => {
@@ -511,28 +599,28 @@ connectedCallback() {
       });
     });
   }
-
+ 
   filterCards(filter) {
     const container = this.shadowRoot.querySelector(".projects-container");
     if (filter === "all") {
       this.render();
       return;
     }
-
+ 
     const filtered = this.projectsData.filter((p) => p.category === filter);
     container.innerHTML = `
-    <div class="category-section">
-      <h2 class="category-title">${this.displayCategoryMap[filter] || filter}</h2>
-      <div class="projects-grid">
-        ${filtered.map((item, i) => this.renderCard(item, i)).join("")}
+      <div class="category-section">
+        <h2 class="category-title">${this.displayCategoryMap[filter] || filter}</h2>
+        <div class="projects-grid">
+          ${filtered.map((item, i) => this.renderCard(item, i)).join("")}
+        </div>
       </div>
-    </div>
-  `;
-
+    `;
+ 
     container.querySelectorAll(".learn-more").forEach((btn, i) => {
       btn.addEventListener("click", () => this.openModal(filtered[i]));
     });
   }
 }
-
+ 
 customElements.define("projects-grid", ProjectsGrid);
