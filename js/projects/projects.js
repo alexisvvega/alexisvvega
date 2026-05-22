@@ -15,7 +15,14 @@ class ProjectsGrid extends HTMLElement {
       title: "Apple FindMy Extension: Safety Alerts",
       date: "April - June 2026",
       image: "assets/images/projects/ucsd.png",
-      modalImage: "assets/images/projects/FindMy.png",
+      modalVideo: "assets/images/projects/caseStudy.mp4",
+      modalImages: [
+        "assets/images/projects/Screen1.png",
+        "assets/images/projects/Screen2.png",
+        "assets/images/projects/Screen3.png",
+        "assets/images/projects/Screen4.png",
+        "assets/images/projects/Screen5.png",
+      ],
       description: "Adding safety alerts to Apple FindMy for worried parents of teens.",
       longDescription: `
         <p><strong>The Problem:</strong> Millions of parents use Apple FindMy to track their teens and young adults. But FindMy only shows their location without context about whether that location has a reported crime, hazards, or emergencies. Parents are left anxious, manually checking outside news sources, or simply worrying until their child texts back.</p>
@@ -43,6 +50,7 @@ class ProjectsGrid extends HTMLElement {
       {
         category: "School",
         title: "MemorySpot",
+        date: "April - June 2025",
         image: "assets/images/projects/memoryspot.png",
         modalImage: "assets/images/projects/memoryspot.jpeg",
         description: "Local-first memory card web app with map integration",
@@ -206,8 +214,7 @@ class ProjectsGrid extends HTMLElement {
       },
     ];
   }
-
-   connectedCallback() {
+connectedCallback() {
     this.render();
     this.addFilterListeners();
  
@@ -226,102 +233,41 @@ class ProjectsGrid extends HTMLElement {
   render() {
     const style = `
       <style>
-        .projects-container {
-          max-width: 1100px;
-          margin: 0 auto;
-          padding: 2rem;
-        }
+        .projects-container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
         .category-section { margin-bottom: 3rem; }
         .category-title {
-          font-size: 1.8rem;
-          font-weight: 600;
-          margin-bottom: 1rem;
-          padding-bottom: 0.5rem;
-          border-bottom: 3px solid var(--primary-accent-color, #7458C0);
+          font-size: 1.8rem; font-weight: 600; margin-bottom: 1rem;
+          padding-bottom: 0.5rem; border-bottom: 3px solid var(--primary-accent-color, #7458C0);
         }
-        .projects-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-          gap: 2rem;
-        }
- 
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
         .project-card {
-          background: #fff;
-          border-radius: 10px;
-          overflow: hidden;
-          box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          height: 420px;
+          background: #fff; border-radius: 10px; overflow: hidden;
+          box-shadow: 0 8px 16px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease;
+          display: flex; flex-direction: column; justify-content: space-between; height: 420px;
         }
-        .project-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 12px 24px rgba(0,0,0,0.15);
-        }
-        .project-card img {
-          width: 80%;
-          padding-top: 1.5rem;
-          height: 180px;
-          object-fit: contain;
-          align-self: center;
-        }
-        .project-content {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          padding: 1.2rem;
-        }
-        .project-content h3 {
-          font-size: 1.1rem;
-          margin-bottom: 0.5rem;
-          min-height: 2.6rem;
-        }
+        .project-card:hover { transform: translateY(-5px); box-shadow: 0 12px 24px rgba(0,0,0,0.15); }
+        .project-card img { width: 80%; padding-top: 1.5rem; height: 180px; object-fit: contain; align-self: center; }
+        .project-content { flex: 1; display: flex; flex-direction: column; justify-content: space-between; padding: 1.2rem; }
+        .project-content h3 { font-size: 1.1rem; margin-bottom: 0.5rem; min-height: 2.6rem; }
         .project-content p {
-          flex-grow: 1;
-          font-size: 0.95rem;
-          color: #444;
-          margin-bottom: 0.8rem;
-          overflow: hidden;
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
-          -webkit-box-orient: vertical;
+          flex-grow: 1; font-size: 0.95rem; color: #444; margin-bottom: 0.8rem;
+          overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
         }
-        .learn-more {
-          align-self: flex-start;
-          margin-top: auto;
-          display: inline-block;
-          color: var(--primary-accent-color, #7458C0);
-          font-weight: 600;
-          cursor: pointer;
-        }
+        .learn-more { align-self: flex-start; margin-top: auto; display: inline-block; color: var(--primary-accent-color, #7458C0); font-weight: 600; cursor: pointer; }
       </style>
     `;
  
     const categories = [...new Set(this.projectsData.map((p) => p.category))];
+    const sectionsHTML = categories.map((category) => {
+      const items = this.projectsData.filter((p) => p.category === category);
+      return `
+        <div class="category-section">
+          <h2 class="category-title">${this.displayCategoryMap[category] || category}</h2>
+          <div class="projects-grid">${items.map((item, i) => this.renderCard(item, i)).join("")}</div>
+        </div>`;
+    }).join("");
  
-    const sectionsHTML = categories
-      .map((category) => {
-        const items = this.projectsData.filter((p) => p.category === category);
-        return `
-          <div class="category-section">
-            <h2 class="category-title">${this.displayCategoryMap[category] || category}</h2>
-            <div class="projects-grid">
-              ${items.map((item, i) => this.renderCard(item, i)).join("")}
-            </div>
-          </div>
-        `;
-      })
-      .join("");
- 
-    this.shadowRoot.innerHTML = `
-      ${style}
-      <div class="projects-container">
-        ${sectionsHTML}
-      </div>
-    `;
+    this.shadowRoot.innerHTML = `${style}<div class="projects-container">${sectionsHTML}</div>`;
  
     this.shadowRoot.querySelectorAll(".learn-more").forEach((btn) => {
       const title = btn.closest(".project-card").querySelector("h3").textContent;
@@ -339,8 +285,7 @@ class ProjectsGrid extends HTMLElement {
           <p>${item.description}</p>
           <span class="learn-more" data-index="${index}">Learn More →</span>
         </div>
-      </div>
-    `;
+      </div>`;
   }
  
   openModal(item) {
@@ -350,165 +295,214 @@ class ProjectsGrid extends HTMLElement {
     const modal = document.createElement("div");
     modal.classList.add("project-modal");
  
-    const isDesktop = window.matchMedia("(min-width: 769px)").matches;
- 
     const buttonsHTML = `
       ${item.links?.github ? `<a href="${item.links.github}" target="_blank" class="modal-link github">GitHub</a>` : ""}
       ${item.links?.figma  ? `<a href="${item.links.figma}"  target="_blank" class="modal-link figma">Figma</a>`  : ""}
       ${item.links?.demo   ? `<a href="${item.links.demo}"   target="_blank" class="modal-link demo">Live Demo</a>`  : ""}
     `;
  
-    // Expand icon SVG (two-arrows-out)
     const expandIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/>
       <line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>
     </svg>`;
- 
-    // Collapse icon SVG (two-arrows-in)
     const collapseIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/>
       <line x1="10" y1="14" x2="3" y2="21"/><line x1="21" y1="3" x2="14" y2="10"/>
     </svg>`;
  
+    // Build coverflow slides: video first (index 0), then images
+    // We'll use a virtual list for infinite looping
+    let covercoverHTML = "";
+    if (item.modalVideo || item.modalImages?.length) {
+      const slides = [];
+      if (item.modalVideo) slides.push({ type: "video", src: item.modalVideo });
+      (item.modalImages || []).forEach((src) => slides.push({ type: "image", src }));
+ 
+      const slideItems = slides.map((s, i) => {
+        if (s.type === "video") {
+          return `<div class="cf-slide" data-index="${i}">
+            <video src="${s.src}" autoplay loop muted playsinline class="cf-video"></video>
+          </div>`;
+        }
+        return `<div class="cf-slide" data-index="${i}">
+          <img src="${s.src}" alt="Design ${i}">
+        </div>`;
+      }).join("");
+ 
+      covercoverHTML = `
+        <div class="coverflow-wrap" id="coverflow-${slug}">
+          <button class="cf-arrow cf-arrow-left" aria-label="Previous">&#8249;</button>
+          <div class="cf-track">${slideItems}</div>
+          <button class="cf-arrow cf-arrow-right" aria-label="Next">&#8250;</button>
+        </div>`;
+    } else if (item.modalImage) {
+      covercoverHTML = `<img src="${item.modalImage}" alt="${item.title}" style="max-width:90%;height:auto;border-radius:8px;display:block;margin:1rem auto;">`;
+    }
+ 
     modal.innerHTML = `
       <style>
         .project-modal {
-          position: fixed;
-          inset: 0;
-          background: rgba(0,0,0,0.6);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          z-index: 100000;
+          position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+          display: flex; align-items: center; justify-content: center; z-index: 100000;
         }
         .modal-content {
-          background: #fff;
-          width: min(580px, 92vw);
-          max-height: min(85dvh, 85vh);
-          border-radius: 12px;
-          box-sizing: border-box;
-          display: flex;
-          flex-direction: column;
-          overflow: hidden;
-          position: relative;
-          transition: width 0.4s cubic-bezier(0.4,0,0.2,1),
-                      max-height 0.4s cubic-bezier(0.4,0,0.2,1),
-                      border-radius 0.35s ease;
+          background: #fff; width: min(580px, 92vw); max-height: min(85dvh, 85vh);
+          border-radius: 12px; box-sizing: border-box; display: flex; flex-direction: column;
+          overflow: hidden; position: relative;
+          transition: width 0.4s cubic-bezier(0.4,0,0.2,1), max-height 0.4s cubic-bezier(0.4,0,0.2,1);
         }
- 
-        /* === EXPANDED STATE (desktop only) === */
         @media (min-width: 769px) {
-          .modal-content.expanded {
-            width: min(1300px, 94vw);
-            max-height: 90dvh;
-          }
+          .modal-content.expanded { width: min(1300px, 94vw); max-height: 90dvh; }
         }
- 
-        /* Expanded: just wider and taller, content stays stacked */
+        /* === EXPANDED STATE COVERFLOW OVERRIDES === */
         @media (min-width: 769px) {
-          .modal-content.expanded .modal-body img {
-            max-width: 70%;
-            max-height: 500px;
+          .modal-content.expanded .cf-track {
+            height: 380px;
           }
+          .modal-content.expanded .cf-slide img {
+            height: 340px;
+            max-width: 280px;
+          }
+          .modal-content.expanded .cf-slide .cf-video {
+            height: 340px;
+            max-width: 200px;
+            width: 200px;
+          }
+          .modal-content.expanded .coverflow-wrap {
+            gap: 0.1rem;  /* Minimal gap - arrows almost touching images */
+            padding-left: 4rem;
+            padding-right: 4rem;
+          }
+          /* Fix video position — center it properly */
+          .modal-content.expanded .cf-slide[data-pos="0"] .cf-video {
+            margin: 0 auto;
+          }
+          
         }
- 
+        /* === COVERFLOW === */
+        .coverflow-wrap {
+          display: flex; align-items: center; justify-content: center;
+          gap: 0.5rem; padding: 1.5rem 0 1rem; position: relative;
+          /* prevent modal overflow:hidden from clipping slide corners */
+          margin: 0 -1.25rem;
+          padding-left: 1.25rem;
+          padding-right: 1.25rem;
+        }
+        .cf-track {
+          display: flex; align-items: center; justify-content: center;
+          position: relative; height: 240px; flex: 1;
+          /* NO overflow:hidden — let side slides show */
+        }
+        .cf-slide {
+          position: absolute;
+          transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+          cursor: pointer; border-radius: 12px; overflow: hidden;
+        }
+        /* Active (center) */
+        .cf-slide[data-pos="0"] {
+          transform: translateX(0) scale(1);
+          opacity: 1; filter: none; z-index: 5;
+        }
+        /* ±1 */
+        .cf-slide[data-pos="-1"] {
+          transform: translateX(-55%) scale(0.75);
+          opacity: 0.5; filter: blur(1px); z-index: 4;
+        }
+        .cf-slide[data-pos="1"] {
+          transform: translateX(55%) scale(0.75);
+          opacity: 0.5; filter: blur(1px); z-index: 4;
+        }
+        /* ±2 */
+        .cf-slide[data-pos="-2"] {
+          transform: translateX(-90%) scale(0.55);
+          opacity: 0.25; filter: blur(2px); z-index: 3;
+        }
+        .cf-slide[data-pos="2"] {
+          transform: translateX(90%) scale(0.55);
+          opacity: 0.25; filter: blur(2px); z-index: 3;
+        }
+        /* ±3+ hidden */
+        .cf-slide[data-pos="-3"], .cf-slide[data-pos="3"],
+        .cf-slide[data-pos="-4"], .cf-slide[data-pos="4"],
+        .cf-slide[data-pos="-5"], .cf-slide[data-pos="5"] {
+          opacity: 0; pointer-events: none; z-index: 0;
+          transform: translateX(0) scale(0.3);
+        }
+        /* Slide media — natural proportions, fixed height only */
+        .cf-slide img {
+          height: 220px;
+          width: auto;
+          max-width: 180px;
+          object-fit: contain;
+          display: block; border-radius: 12px; margin: 0;
+        }
+        .cf-slide .cf-video {
+          height: 220px;
+          width: auto;
+          max-width: 120px;
+          object-fit: contain;
+          background: #000;
+          display: block; border-radius: 12px; margin: 0;
+        }
+
+        .cf-arrow {
+          background: none; border: 1px solid #ddd; border-radius: 50%;
+          width: 34px; height: 34px; font-size: 1.5rem; cursor: pointer;
+          color: #555; flex-shrink: 0; z-index: 10;
+          display: flex; align-items: center; justify-content: center;
+          transition: background 0.2s, border-color 0.2s, color 0.2s;
+        }
+        .cf-arrow:hover {
+          background: #f3f0ff;
+          border-color: var(--primary-accent-color, #8394f7);
+          color: var(--primary-accent-color, #8394f7);
+        }
+        
+        /* === REST OF MODAL === */
         .modal-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 1rem 1.25rem;
-          border-bottom: 1px solid #eee;
-          flex-shrink: 0;
+          display: flex; align-items: center; justify-content: space-between;
+          padding: 1rem 1.25rem; border-bottom: 1px solid #eee; flex-shrink: 0;
         }
-        .modal-title {
-          margin: 0;
-          font-size: 1.25rem;
-          font-weight: 700;
-        }
-        .modal-date {
-          font-size: 0.85rem;
-          color: #777;
-          margin: 0.25rem 0 0;
-          font-weight: 400;
-        }
-        .modal-header-actions {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-        }
+        .modal-title { margin: 0; font-size: 1.25rem; font-weight: 700; }
+        .modal-date { font-size: 0.85rem; color: #777; margin: 0.25rem 0 0; font-weight: 400; }
+        .modal-header-actions { display: flex; align-items: center; gap: 0.5rem; }
         .modal-expand-btn {
-          display: none; /* hidden on mobile */
-          background: none;
-          border: 1px solid #ddd;
-          border-radius: 6px;
-          padding: 5px 7px;
-          cursor: pointer;
-          color: #555;
-          line-height: 1;
-          transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+          display: none; background: none; border: 1px solid #ddd; border-radius: 6px;
+          padding: 5px 7px; cursor: pointer; color: #555; line-height: 1;
+          transition: background 0.2s, color 0.2s, border-color 0.2s;
         }
         .modal-expand-btn:hover {
           background: #f3f0ff;
           border-color: var(--primary-accent-color, #8394f7);
           color: var(--primary-accent-color, #8394f7);
         }
-        /* Show expand button only on desktop */
         @media (min-width: 769px) {
           .modal-expand-btn { display: inline-flex; align-items: center; justify-content: center; }
         }
         .modal-close {
-          background: none;
-          border: none;
-          font-size: 1.8rem;
-          line-height: 1;
-          cursor: pointer;
-          padding: 0 0 0 0.25rem;
-          color: #555;
+          background: none; border: none; font-size: 1.8rem; line-height: 1;
+          cursor: pointer; padding: 0 0 0 0.25rem; color: #555;
         }
-        .modal-body {
-          padding: 1rem 1.25rem;
-          overflow-y: auto;
-          -webkit-overflow-scrolling: touch;
-          flex: 1;
-        }
-        .modal-body img {
-          max-width: 90%;
-          height: auto;
-          border-radius: 8px;
-          display: block;
-          margin: 1rem auto;
-        }
+        .modal-body { padding: 1rem 1.25rem; overflow-y: auto; -webkit-overflow-scrolling: touch; flex: 1; }
+        .modal-body > img { max-width: 90%; height: auto; border-radius: 8px; display: block; margin: 1rem auto; }
         .modal-footer {
-          padding: 1rem 1.25rem;
-          border-top: 1px solid #eee;
-          display: flex;
-          gap: 0.75rem;
-          flex-wrap: wrap;
-          justify-content: center;
-          flex-shrink: 0;
+          padding: 1rem 1.25rem; border-top: 1px solid #eee;
+          display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; flex-shrink: 0;
         }
         .modal-link {
-          display: inline-block;
-          padding: 0.6rem 1.1rem;
-          border-radius: 8px;
-          text-decoration: none;
-          font-weight: 700;
-          color: #fff;
-          text-align: center;
-          transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
-          min-width: 120px;
-          box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+          display: inline-block; padding: 0.6rem 1.1rem; border-radius: 8px;
+          text-decoration: none; font-weight: 700; color: #fff; text-align: center;
+          transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+          min-width: 120px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);
         }
         .modal-link:hover { transform: translateY(-2px); opacity: 0.95; }
         .modal-link:active { transform: translateY(0); opacity: 1; }
         .modal-link.github { background: #A7C1A8; }
         .modal-link.figma  { background: #eb8768; }
         .modal-link.demo   { background: #89A8B2; }
- 
         .modal-body::-webkit-scrollbar { width: 8px; }
         .modal-body::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.25); border-radius: 4px; }
         .modal-body::-webkit-scrollbar-track { background: transparent; }
- 
         @media (max-width: 480px) {
           .modal-content { border-radius: 10px; }
           .modal-title { font-size: 1.1rem; }
@@ -522,29 +516,21 @@ class ProjectsGrid extends HTMLElement {
             ${item.date ? `<p class="modal-date">${item.date}</p>` : ""}
           </div>
           <div class="modal-header-actions">
-            <button class="modal-expand-btn" aria-label="Expand modal" title="Expand view">
-              ${expandIcon}
-            </button>
+            <button class="modal-expand-btn" aria-label="Expand modal" title="Expand view">${expandIcon}</button>
             <button class="modal-close" aria-label="Close modal">&times;</button>
           </div>
         </div>
  
         <div class="modal-body">
-          ${item.modalImage ? `<img src="${item.modalImage}" alt="${item.title}">` : ""}
+          ${covercoverHTML}
           <div class="modal-body-text">
             <p><strong>Role:</strong> ${item.role}</p>
             <p><strong>Tech:</strong> ${item.tech}</p>
             <p>${item.longDescription || item.description}</p>
-            ${
-              item.contributions?.length
-                ? `
+            ${item.contributions?.length ? `
               <h4>Key Contributions:</h4>
-              <ul>
-                ${item.contributions.map((c) => `<li>${c}</li>`).join("")}
-              </ul>
-            `
-                : ""
-            }
+              <ul>${item.contributions.map((c) => `<li>${c}</li>`).join("")}</ul>
+            ` : ""}
           </div>
         </div>
  
@@ -557,11 +543,45 @@ class ProjectsGrid extends HTMLElement {
     document.body.appendChild(modal);
     requestAnimationFrame(() => modal.classList.add("active"));
  
-    // --- Expand / collapse toggle ---
+    // --- Coverflow carousel with infinite looping ---
+    const carousel = modal.querySelector(`#coverflow-${slug}`);
+    if (carousel) {
+      const slides = [...carousel.querySelectorAll(".cf-slide")];
+      const total = slides.length;
+      // Start at 0 (video is first slide)
+      let current = 0;
+ 
+      function updatePositions() {
+        slides.forEach((slide, i) => {
+          // Calculate shortest circular distance
+          let pos = i - current;
+          // Wrap to range [-half, half]
+          if (pos > total / 2)  pos -= total;
+          if (pos < -total / 2) pos += total;
+          pos = Math.max(-5, Math.min(5, pos));
+          slide.dataset.pos = pos.toString();
+        });
+      }
+ 
+      function advance(dir) {
+        // Wrap around for infinite loop
+        current = ((current + dir) % total + total) % total;
+        updatePositions();
+      }
+ 
+      updatePositions();
+ 
+      carousel.querySelector(".cf-arrow-left").addEventListener("click", () => advance(-1));
+      carousel.querySelector(".cf-arrow-right").addEventListener("click", () => advance(1));
+      slides.forEach((slide, i) => {
+        slide.addEventListener("click", () => { current = i; updatePositions(); });
+      });
+    }
+ 
+    // --- Expand / collapse ---
     const modalContent = modal.querySelector(".modal-content");
     const expandBtn = modal.querySelector(".modal-expand-btn");
     let expanded = false;
- 
     expandBtn.addEventListener("click", () => {
       expanded = !expanded;
       modalContent.classList.toggle("expanded", expanded);
@@ -577,14 +597,9 @@ class ProjectsGrid extends HTMLElement {
       setTimeout(() => modal.remove(), 150);
       window.removeEventListener("keydown", onEsc);
     };
-    const onEsc = (e) => {
-      if (e.key === "Escape") closeModal();
-    };
- 
+    const onEsc = (e) => { if (e.key === "Escape") closeModal(); };
     modal.querySelector(".modal-close").onclick = closeModal;
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) closeModal();
-    });
+    modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
     window.addEventListener("keydown", onEsc, { once: true });
   }
  
@@ -594,29 +609,20 @@ class ProjectsGrid extends HTMLElement {
       button.addEventListener("click", () => {
         filterButtons.forEach((btn) => btn.classList.remove("active"));
         button.classList.add("active");
-        const filter = button.dataset.filter;
-        this.filterCards(filter);
+        this.filterCards(button.dataset.filter);
       });
     });
   }
  
   filterCards(filter) {
     const container = this.shadowRoot.querySelector(".projects-container");
-    if (filter === "all") {
-      this.render();
-      return;
-    }
- 
+    if (filter === "all") { this.render(); return; }
     const filtered = this.projectsData.filter((p) => p.category === filter);
     container.innerHTML = `
       <div class="category-section">
         <h2 class="category-title">${this.displayCategoryMap[filter] || filter}</h2>
-        <div class="projects-grid">
-          ${filtered.map((item, i) => this.renderCard(item, i)).join("")}
-        </div>
-      </div>
-    `;
- 
+        <div class="projects-grid">${filtered.map((item, i) => this.renderCard(item, i)).join("")}</div>
+      </div>`;
     container.querySelectorAll(".learn-more").forEach((btn, i) => {
       btn.addEventListener("click", () => this.openModal(filtered[i]));
     });
@@ -624,3 +630,4 @@ class ProjectsGrid extends HTMLElement {
 }
  
 customElements.define("projects-grid", ProjectsGrid);
+ 

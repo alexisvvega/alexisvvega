@@ -6,7 +6,7 @@
   --filter-button-hover-color: #8394f757;
   --modal-overlay: rgba(0, 0, 0, 0.7);
 }
-
+ 
 /* === HERO SECTION === */
 .hero-section {
   display: flex;
@@ -16,14 +16,14 @@
   text-align: center;
   padding: 10rem 2rem 4rem;
 }
-
+ 
 .hero-title {
   font-size: 2.5rem;
   font-weight: 700;
   color: var(--primary-accent-color);
   margin-bottom: 1rem;
 }
-
+ 
 .hero-description {
   font-size: clamp(1rem, 2vw, 1.2rem);
   color: var(--secondary-text-color);
@@ -31,7 +31,7 @@
   margin: 0 auto;
   line-height: 1.6;
 }
-
+ 
 /* === FILTER BAR === */
 .projects-filter {
   display: flex;
@@ -46,7 +46,7 @@
   box-sizing: border-box;
   overflow: hidden;
 }
-
+ 
 .filter-button {
   flex: 1;
   text-align: center;
@@ -61,16 +61,16 @@
     color 0.3s ease;
   border-radius: 999px;
 }
-
+ 
 .filter-button.active {
   background-color: var(--primary-accent-color) !important;
   color: var(--white-font-color);
 }
-
+ 
 .filter-button:hover:not(.active) {
   background-color: var(--filter-button-hover-color);
 }
-
+ 
 /* === MODAL === */
 .project-modal {
   position: fixed;
@@ -87,36 +87,36 @@
   pointer-events: none;
   transition: opacity 0.3s;
 }
-
+ 
 .project-modal.active {
   opacity: 1;
   pointer-events: auto;
 }
-
+ 
 .modal-content {
   background: #fff;
   border-radius: 12px;
-  max-width: 700px;
-  width: 90%;
-  padding: 2rem;
+  width: min(580px, 92vw);
+  max-width: unset;
   position: relative;
   animation: slideIn 0.3s ease;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
+ 
 .modal-content h2 {
   margin-bottom: 0.5rem;
 }
-
+ 
 .modal-content p {
   margin-bottom: 1rem;
 }
-
+ 
 .modal-actions {
   display: flex;
   gap: 1rem;
   margin-top: 1.5rem;
 }
-
+ 
 .modal-link {
   padding: 0.6rem 1.2rem;
   border-radius: 8px;
@@ -124,21 +124,21 @@
   font-weight: 600;
   transition: all 0.3s;
 }
-
+ 
 .modal-link.github {
   background: #24292e;
   color: #fff;
 }
-
+ 
 .modal-link.demo {
   background: var(--primary-accent-color);
   color: #fff;
 }
-
+ 
 .modal-link:hover {
   opacity: 0.85;
 }
-
+ 
 .modal-close {
   position: absolute;
   top: 12px;
@@ -148,7 +148,7 @@
   border: none;
   cursor: pointer;
 }
-
+ 
 @keyframes slideIn {
   from {
     transform: translateY(30px);
@@ -159,7 +159,7 @@
     opacity: 1;
   }
 }
-
+ 
 @media (max-width: 600px) {
   .projects-filter {
     flex-wrap: wrap;
@@ -170,5 +170,21 @@
   .filter-button {
     flex: 1 1 45%;
     margin: 0.3rem;
+  }
+}
+ 
+@media (min-width: 769px) {
+  .modal-content.expanded {
+    width: min(1300px, 94vw);
+  }
+ 
+  .modal-content.expanded .modal-body img {
+    max-width: 70%;
+    max-height: 500px;
+  }
+ 
+  .modal-content.expanded .modal-body video {
+    max-width: 30%;
+    max-height: 400px;
   }
 }
