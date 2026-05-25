@@ -32,6 +32,14 @@ class ProjectsGrid extends HTMLElement {
         <p><strong>User Research:</strong> We interviewed four parents who actively use FindMy. Key findings: "The location itself doesn't let me know how safe the area is." Parents check locations compulsively (every 30 minutes) and feel anxious even after checking because they lack safety context.</p>
 
         <p><strong>The Market Opportunity:</strong> The personal safety app market is projected to reach $48 billion by 2033. 70% of parents worry about their children's safety. Yet FindMy which is on over 1 billion devices, offers zero safety context.</p>
+        
+        <p><strong>Design Rationale:</strong> We chose a color-coded map overlay because parents told us they check locations quickly and compulsively. A visual signal (green/yellow/red) communicates safety in under a second without requiring them to leave the app. Push notifications were designed to be radius-based and customizable so parents aren't overwhelmed with every nearby incident, only ones that matter relative to their child's location.</p>
+
+        <p><strong>User Testing:</strong> We tested two prototype variations with parents in our target audience. Participants preferred the version with the map overlay visible by default over the opt-in toggle version, saying the always-on context made them feel less anxious even before an alert fired. The main confusion point was the radius customization — users weren't sure if the radius was in miles or blocks, which flagged a labeling fix for our next iteration.</p>
+
+        <p><strong>Point of View:</strong> We believe parents don't need another safety app. They need the tool they already trust (FindMy) to give them context they're currently missing. The anxiety comes not from not knowing where their child is, but from not knowing if where they are is safe.</p>
+
+        <p><strong>Next Steps:</strong> We will refine the radius label to include explicit units, explore a notification digest option to reduce alert fatigue, and run one more round of testing with the updated overlay toggle placement based on user feedback.</p>    
         `,
         tech: "Figma, User Research, UX Design, iOS Design Guidelines",
         role: "UX Designer & Researcher",
@@ -145,6 +153,7 @@ class ProjectsGrid extends HTMLElement {
       {
         category: "Club",
         title: "RootsAI",
+        date: "April 2025",
         image: "assets/images/projects/acm.png",
         modalImage: "assets/images/projects/rootsai.png",
         description: "Voice-powered, multilingual app for immigrant families",
