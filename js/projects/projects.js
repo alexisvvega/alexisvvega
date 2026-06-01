@@ -41,6 +41,20 @@ class ProjectsGrid extends HTMLElement {
 
         <p><strong>Next Steps:</strong> We will refine the radius label to include explicit units, explore a notification digest option to reduce alert fatigue, and run one more round of testing with the updated overlay toggle placement based on user feedback.</p>    
         `,
+        beforeAfter: [
+          {
+            title: "Screen 2: Person Details Card",
+            beforeImg: "assets/images/projects/before1.png",
+            afterImg: "assets/images/projects/after1.png",
+            caption: `Based on user feedback, we restructured the information hierarchy of the person details card. The original design kept Apple's default layout: Contact, Directions, and Notifications. Users told us they wanted safety context immediately — not buried under navigation options. In the redesign, we elevated "Safety Insights" to the top of the card and added battery percentage to the status line, giving parents a complete at-a-glance picture of their child's situation without any extra taps.`
+          },
+          {
+            title: "Screen 4: Alert Radius & Filters",
+            beforeImg: "assets/images/projects/before2.png",
+            afterImg: "assets/images/projects/after2.png",
+            caption: `User testing revealed two major pain points: participants couldn't visualize what preset radius distances actually covered, and they were confused by vague alert category names. In the redesign, we replaced the preset buttons with a drag slider that shows a live map preview — users can see exactly what's included in their chosen radius in real time. We also added plain-language descriptions under each alert filter (e.g. "Assaults, theft, shootings, weapons, vandalism" under Crime & Weapons) and added a Registered Sex Offenders category after multiple participants independently requested it.`
+          }
+        ],
         tech: "Figma, User Research, UX Design, iOS Design Guidelines",
         role: "UX Designer & Researcher",
         contributions: [
@@ -96,8 +110,6 @@ class ProjectsGrid extends HTMLElement {
         ],
         links: {
           github: "https://github.com/alexisvvega/YouLostIt",
-          figma: "https://figma.com/my-prototype",
-          demo: "https://youlostit-demo.com",
         },
       },
       {
@@ -540,6 +552,26 @@ connectedCallback() {
               <h4>Key Contributions:</h4>
               <ul>${item.contributions.map((c) => `<li>${c}</li>`).join("")}</ul>
             ` : ""}
+            ${item.beforeAfter?.length ? `
+            <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid #eee;">
+            <h4 style="font-size:1rem; font-weight:700; margin-bottom:1rem;">Before & After: Design Iterations</h4>
+            ${item.beforeAfter.map(ba => `
+              <div style="margin-bottom: 2rem;">
+                <p style="font-weight:600; margin-bottom:0.75rem;">${ba.title}</p>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:0.75rem;">
+                  <div>
+                    <p style="font-size:0.75rem; font-weight:600; color:#888; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.4rem;">Before</p>
+                    <img src="${ba.beforeImg}" alt="Before: ${ba.title}" style="width:100%; height:auto; max-height:400px; object-fit:contain; border-radius:8px; border:1px solid #eee; display:block; margin:0 auto; max-width:unset;">
+                  </div>
+                  <div>
+                    <p style="font-size:0.75rem; font-weight:600; color:#8394f7; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.4rem;">After</p>
+                    <img src="${ba.afterImg}" alt="After: ${ba.title}" style="width:100%; height:auto; max-height:400px; object-fit:contain; border-radius:8px; border:1px solid #eee; display:block; margin:0 auto; max-width:unset;">
+                </div>
+                </div>
+                <p style="font-size:0.9rem; color:#555; line-height:1.6;">${ba.caption}</p>
+              </div>
+            `).join("")}
+          ` : ""}
           </div>
         </div>
  
