@@ -22,25 +22,28 @@ class ProjectsGrid extends HTMLElement {
         "assets/images/projects/Screen3.png",
         "assets/images/projects/Screen4.png",
         "assets/images/projects/Screen5.png",
+        "assets/images/projects/Screen6.png",
       ],
       description: "Adding safety alerts to Apple FindMy for worried parents of teens.",
       longDescription: `
-        <p><strong>The Problem:</strong> Millions of parents use Apple FindMy to track their teens and young adults. But FindMy only shows their location without context about whether that location has a reported crime, hazards, or emergencies. Parents are left anxious, manually checking outside news sources, or simply worrying until their child texts back.</p>
+        <p>A parent checks FindMy. Their teen is at a location they don't recognize. The dot on the map is there — but is it safe? There's no way to know without leaving the app, Googling the neighborhood, and piecing together news headlines while their anxiety climbs. This is the daily reality for millions of parents who already use FindMy to track their kids.</p>
 
-        <p><strong>Our Solution:</strong> We extended FindMy with two features: (1) a color-coded safety layer on the map (green/yellow/red based on recent incident density), and (2) customizable push notifications for when an incident occurs within a preset radius of their child's location.</p>
+        <p><strong>The Problem:</strong> Parents of teens and young adults need to feel confident that their child's location is safe — not just visible. Right now, FindMy shows where someone is, but offers zero context about whether that place has recent crime, active hazards, or nearby emergencies. Parents are left anxious even after checking, because a dot on a map doesn't answer the question they're actually asking: is my kid okay right now?</p>
 
-        <p><strong>User Research:</strong> We interviewed four parents who actively use FindMy. Key findings: "The location itself doesn't let me know how safe the area is." Parents check locations compulsively (every 30 minutes) and feel anxious even after checking because they lack safety context.</p>
+        <p><strong>Our Solution:</strong> We extended FindMy with two features built directly into the interface parents already open every day: (1) a color-coded safety overlay on the map — green, yellow, or red — based on real incident density near their child's location, and (2) customizable push notifications that alert parents when an incident occurs within a radius they set themselves. No new app. No behavior change. Just the context they were already looking for, right where they already look.</p>
 
-        <p><strong>The Market Opportunity:</strong> The personal safety app market is projected to reach $48 billion by 2033. 70% of parents worry about their children's safety. Yet FindMy which is on over 1 billion devices, offers zero safety context.</p>
-        
-        <p><strong>Design Rationale:</strong> We chose a color-coded map overlay because parents told us they check locations quickly and compulsively. A visual signal (green/yellow/red) communicates safety in under a second without requiring them to leave the app. Push notifications were designed to be radius-based and customizable so parents aren't overwhelmed with every nearby incident, only ones that matter relative to their child's location.</p>
+        <p><strong>User Research:</strong> We interviewed four parents who actively use FindMy to track their college-aged children. Every single one described the same pattern: they check the location, feel briefly reassured, and then feel anxious again because the location alone tells them nothing. One parent told us directly: "The location itself doesn't let me know how safe the area is." Parents check compulsively — some every 30 minutes — not because they're overprotective, but because the tool gives them no reason to feel settled after checking.</p>
 
-        <p><strong>User Testing:</strong> We tested two prototype variations with parents in our target audience. Participants preferred the version with the map overlay visible by default over the opt-in toggle version, saying the always-on context made them feel less anxious even before an alert fired. The main confusion point was the radius customization — users weren't sure if the radius was in miles or blocks, which flagged a labeling fix for our next iteration.</p>
+        <p><strong>The Market Opportunity:</strong> The personal safety app market is projected to reach $48 billion by 2033. 70% of parents report worrying about their children's safety on a regular basis. FindMy is already on over 1 billion devices — meaning the distribution problem is already solved. The missing piece is safety context, and that's exactly what we designed.</p>
 
-        <p><strong>Point of View:</strong> We believe parents don't need another safety app. They need the tool they already trust (FindMy) to give them context they're currently missing. The anxiety comes not from not knowing where their child is, but from not knowing if where they are is safe.</p>
+        <p><strong>Design Rationale:</strong> We chose a color-coded map overlay rather than a text-based alert system because parents told us they check FindMy quickly, often while multitasking. A visual signal communicates safety status in under a second without requiring them to read anything or navigate anywhere. Push notifications were made radius-based and fully customizable so parents can tune out noise and only hear about incidents that are actually close enough to matter. Every design decision was made to reduce the cognitive load of worrying — not add to it.</p>
 
-        <p><strong>Next Steps:</strong> We will refine the radius label to include explicit units, explore a notification digest option to reduce alert fatigue, and run one more round of testing with the updated overlay toggle placement based on user feedback.</p>    
-        `,
+        <p><strong>User Testing:</strong> We tested two prototype variations with parents in our target audience. Participants consistently preferred the version with the safety overlay visible by default over one that required them to opt in and toggle it on. Their reasoning: the always-on context made them feel calmer even before any alert fired, because they could see at a glance that the area was green. The most significant confusion point was the radius customization — participants weren't sure whether the radius measured miles or city blocks — which gave us a clear and actionable fix for our next iteration.</p>
+
+        <p><strong>Point of View:</strong> We believe parents don't need another safety app — they need the tool they already trust to tell them what they actually want to know. The anxiety isn't about not knowing where their child is. It's about not knowing if where they are is safe. That's a gap FindMy is uniquely positioned to close, and one that no competitor has addressed at scale.</p>
+
+        <p><strong>Next Steps:</strong> We will add explicit unit labels to the radius slider so users always know whether they're setting miles or blocks. We will explore a notification digest option to prevent alert fatigue for parents in high-density urban areas. We will also run a follow-up round of testing specifically focused on the revised overlay toggle placement and the new alert filter descriptions to confirm the changes land the way we intended.</p>
+      `,
         beforeAfter: [
           {
             title: "Screen 2: Person Details Card",
