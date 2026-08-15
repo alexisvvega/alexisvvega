@@ -6,10 +6,74 @@ class ProjectsGrid extends HTMLElement {
     this.displayCategoryMap = {
       Club: "Club/Personal",
       School: "School",
-      Internship: "Internship",
+      Internship: "Internship/Job",
     };
 
     this.projectsData = [
+      {
+        category: "Internship/Job",
+        title: "Project 816 — Nonprofit Website Redesign",
+        date: "June 2026 — August 2026",
+        image: "assets/images/projects/project816.svg",
+        modalImage: "assets/images/projects/project816.svg",
+        description: "Sole designer, researcher, and developer for a 501(c)(3) nonprofit's complete digital transformation.",
+        longDescription: `
+          <p><strong>The Challenge:</strong> Project 816 is a 501(c)(3) nonprofit that walks alongside women and children as they rebuild their lives with safety, support, and hope. Their existing website was outdated, difficult to navigate, and failing to convert visitors into donors or corporate partners. The organization had a powerful mission and compelling founder story, but the website wasn't doing justice to the work they do.</p>
+
+          <p><strong>My Role:</strong> I was brought on as the sole designer, researcher, and developer to lead the complete digital transformation of Project 816. This meant owning the entire product lifecycle — from user research and competitive analysis through design, development, testing, and deployment. I worked directly with the founder to understand her vision and translated it into a modern, trustworthy, and emotionally resonant web experience.</p>
+
+          <p><strong>The Process:</strong></p>
+          <ul>
+            <li><strong>Research:</strong> Analyzed competitor nonprofits (Generate Hope, Safe Haven Ministries, Help Hope Live) to identify UX best practices and gaps. Conducted stakeholder interviews with the founder to understand organizational goals, target audiences, and key messaging priorities.</li>
+            <li><strong>Information Architecture:</strong> Reorganized all content into a clear 8-page structure (Home, About Us, How It Works, Programs, For Companies, Contact, Request Support and Donate) with intuitive navigation. Moved critical elements like the emergency hotline and donation buttons to prominent, visible positions.</li>
+            <li><strong>Design:</strong> Created high-fidelity Figma prototypes with a custom brand system using calming colors (sage green, warm ivory, golden amber) and a refined visual hierarchy. Designed for emotional resonance while maintaining professional credibility for corporate partners.</li>
+            <li><strong>Development:</strong> Built the fully responsive website from scratch using HTML, CSS, and JavaScript. Implemented accessible, performant code with a desktop-first approach. Integrated donation functionality and email signup.</li>
+            <li><strong>Testing & Deployment:</strong> Conducted user testing to validate navigation and messaging. Iterated based on feedback. Deployed the live site at project816.org.</li>
+          </ul>
+
+          <p><strong>The Outcome:</strong> The redesigned website dramatically improved the organization's digital presence. Key improvements include:</p>
+          <ul>
+            <li>Clear, intuitive navigation that guides visitors to the right place (donors, corporate partners, women seeking help)</li>
+            <li>Strategic placement of donation CTAs throughout the site, increasing conversion potential</li>
+            <li>Responsive design that works beautifully on all devices</li>
+            <li>Professional, trustworthy brand that attracts corporate partners</li>
+            <li>Reduced cognitive load with clean information architecture</li>
+          </ul>
+
+          <p><strong>Impact:</strong> Project 816 now has a digital presence that matches the quality and compassion of their mission. The new site serves as a powerful tool for fundraising, corporate partnership development, and community engagement.</p>
+        `,
+        beforeAfter: [
+          {
+            title: "Homepage — Before & After",
+            beforeImg: "assets/images/projects/816-home-before.jpeg",
+            afterImg: "assets/images/projects/816-home-after.png",
+            caption: `The original homepage was a single, overwhelming scroll with no clear hierarchy or calls to action. Users struggled to find donation buttons, corporate sponsorship information, or the founder's story. The redesign introduced a clear visual hierarchy, strategic CTAs, and a calming color palette that conveys trust and compassion. The emergency hotline was moved to a prominent, visible banner.`
+          },
+          {
+            title: "Corporate Sponsorship — Before & After",
+            beforeImg: "assets/images/projects/project816-before-corporate.png",
+            afterImg: "assets/images/projects/project816-after-corporate.png",
+            caption: `The original corporate sponsorship process was fragmented and frustrating. Interested companies had to navigate to a separate Google Forms page, fill out a generic form, and wait for follow-up which created friction at every step. The redesign consolidated everything onto a single, dedicated "For Companies" page with clear sponsorship tiers, a native form with descriptive placeholders, and an optional PDF download. Companies can now complete the entire intake process without leaving the site, while the use of FormSubmit.co ensures submissions go directly to the organization's email. The form's placeholder text guides users through each field, making the process feel intuitive and professional rather than like a generic Google Form.`
+          }
+        ],
+        tech: "HTML, CSS, JavaScript, Figma, UX Research, Information Architecture, Responsive Design",
+        role: "Sole Product Designer & Developer",
+        contributions: [
+          "Owned the entire product lifecycle from research to deployment as the sole designer and developer",
+          "Conducted competitor analysis and stakeholder interviews to inform strategy",
+          "Created information architecture and reorganized all content into 8 intuitive pages",
+          "Designed high-fidelity Figma prototypes with custom brand system (colors, typography, visual hierarchy)",
+          "Built fully responsive website from scratch using HTML, CSS, and JavaScript",
+          "Implemented strategic CTAs for donations and corporate partnerships",
+          "Conducted user testing and iterated based on feedback",
+          "Deployed live production site at project816.org",
+        ],
+        links: {
+          figma: "https://www.figma.com/design/i04t5ZJM4rI7bn2CLatjm4/Project-816?node-id=0-1&p=f&t=yKKSHb9QgrLFoH3Z-0",
+          github: "https://github.com/alexisvvega/project816",
+          demo: "https://project816.org/",
+        },
+      },
       {
       category: "School",
       title: "Apple FindMy Extension: Safety Alerts",
@@ -210,7 +274,7 @@ class ProjectsGrid extends HTMLElement {
         },
       },
       {
-        category: "Internship",
+        category: "Internship/Job",
         title: "Helicoid Industries Website Redesign",
         date: "June 2025 – August 2025",
         image: "assets/images/projects/helicoid.png",
