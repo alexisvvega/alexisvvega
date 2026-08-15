@@ -227,6 +227,7 @@ class ProjectsGrid extends HTMLElement {
           github: "https://github.com/TritonSE/Psyches-Of-Color-App",
           figma:
             "https://www.figma.com/design/3DE42BsgMUxrbAQxzWL29V/Psyches-of-Color-designs?node-id=0-1&p=f&t=Z3nUfEkvA3GkoDCy-0",
+          demo: "https://psyches-of-color.vercel.app/login",
         },
       },
       {
